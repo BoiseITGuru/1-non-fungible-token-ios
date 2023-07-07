@@ -1,0 +1,14 @@
+{
+  "name": "1-non-fungible-token-ios",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "mint": "node ./actions/mint_nfts.js"
+  },
+  "dependencies": {
+    "@onflow/fcl": "1.1.0",
+    "dotenv": "^16.0.1",
+    "elliptic": "^6.5.4",
+    "sha3": "^2.1.4"
+  }
+}
