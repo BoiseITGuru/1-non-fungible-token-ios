@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "fcl-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/outblock/fcl-swift.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "b0b4c0cd502fbc2a7eb8e3018e63aa79897e47ae"
+      }
+    },
+    {
       "identity" : "flow-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/outblock/flow-swift.git",

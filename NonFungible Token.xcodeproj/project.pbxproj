@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,6 +25,7 @@
 		2B5478752A572A4F004AB863 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2B5478742A572A4F004AB863 /* CachedAsyncImage */; };
 		2B5478782A572BC3004AB863 /* Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5478762A572BC3004AB863 /* Scripts.swift */; };
 		2B5478792A572BC3004AB863 /* Transactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5478772A572BC3004AB863 /* Transactions.swift */; };
+		2B8153292A5896AC00CDB8C5 /* FCL in Frameworks */ = {isa = PBXBuildFile; productRef = 2B8153282A5896AC00CDB8C5 /* FCL */; };
 		2B8170DA2A57C0AD005E2D7D /* FCL in Frameworks */ = {isa = PBXBuildFile; productRef = 2B8170D92A57C0AD005E2D7D /* FCL */; };
 		2BF28D202A578F980057441E /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF28D1F2A578F980057441E /* ErrorView.swift */; };
 /* End PBXBuildFile section */
@@ -58,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B8153292A5896AC00CDB8C5 /* FCL in Frameworks */,
 				2B8170DA2A57C0AD005E2D7D /* FCL in Frameworks */,
 				2B5478752A572A4F004AB863 /* CachedAsyncImage in Frameworks */,
 			);
@@ -176,6 +178,7 @@
 			packageProductDependencies = (
 				2B5478742A572A4F004AB863 /* CachedAsyncImage */,
 				2B8170D92A57C0AD005E2D7D /* FCL */,
+				2B8153282A5896AC00CDB8C5 /* FCL */,
 			);
 			productName = "NonFungible Token";
 			productReference = 2B5478452A572415004AB863 /* NonFungible Token.app */;
@@ -207,7 +210,7 @@
 			mainGroup = 2B54783C2A572415004AB863;
 			packageReferences = (
 				2B5478732A572A4F004AB863 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
-				2B8170D82A57C0AD005E2D7D /* XCLocalSwiftPackageReference "../../Flow/fcl-swift" */,
+				2B8153272A5896AC00CDB8C5 /* XCRemoteSwiftPackageReference "fcl-swift" */,
 			);
 			productRefGroup = 2B5478462A572415004AB863 /* Products */;
 			projectDirPath = "";
@@ -480,13 +483,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		2B8170D82A57C0AD005E2D7D /* XCLocalSwiftPackageReference "../../Flow/fcl-swift" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../Flow/fcl-swift";
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		2B5478732A572A4F004AB863 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -496,6 +492,14 @@
 				minimumVersion = 2.1.1;
 			};
 		};
+		2B8153272A5896AC00CDB8C5 /* XCRemoteSwiftPackageReference "fcl-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/outblock/fcl-swift.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -503,6 +507,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2B5478732A572A4F004AB863 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
 			productName = CachedAsyncImage;
+		};
+		2B8153282A5896AC00CDB8C5 /* FCL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B8153272A5896AC00CDB8C5 /* XCRemoteSwiftPackageReference "fcl-swift" */;
+			productName = FCL;
 		};
 		2B8170D92A57C0AD005E2D7D /* FCL */ = {
 			isa = XCSwiftPackageProductDependency;
