@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		2B5478782A572BC3004AB863 /* Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5478762A572BC3004AB863 /* Scripts.swift */; };
 		2B5478792A572BC3004AB863 /* Transactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5478772A572BC3004AB863 /* Transactions.swift */; };
 		2B8170DA2A57C0AD005E2D7D /* FCL in Frameworks */ = {isa = PBXBuildFile; productRef = 2B8170D92A57C0AD005E2D7D /* FCL */; };
+		2B8196442B1AA43300D8B031 /* ecDAO in Frameworks */ = {isa = PBXBuildFile; productRef = 2B8196432B1AA43300D8B031 /* ecDAO */; };
 		2BC661392B19461B0094F320 /* ecDAO in Frameworks */ = {isa = PBXBuildFile; productRef = 2BC661382B19461B0094F320 /* ecDAO */; };
 		2BC6613B2B1964DD0094F320 /* SwiftCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC6613A2B1964DD0094F320 /* SwiftCode.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B8196442B1AA43300D8B031 /* ecDAO in Frameworks */,
 				2B8170DA2A57C0AD005E2D7D /* FCL in Frameworks */,
 				2BC661392B19461B0094F320 /* ecDAO in Frameworks */,
 			);
@@ -133,6 +135,7 @@
 			packageProductDependencies = (
 				2B8170D92A57C0AD005E2D7D /* FCL */,
 				2BC661382B19461B0094F320 /* ecDAO */,
+				2B8196432B1AA43300D8B031 /* ecDAO */,
 			);
 			productName = "NonFungible Token";
 			productReference = 2B5478452A572415004AB863 /* NonFungible Token.app */;
@@ -163,7 +166,7 @@
 			);
 			mainGroup = 2B54783C2A572415004AB863;
 			packageReferences = (
-				2BC661372B19461B0094F320 /* XCLocalSwiftPackageReference "../../../Forge4Flow/ecosystem_sdks/ecDAO" */,
+				2B8196422B1AA43300D8B031 /* XCRemoteSwiftPackageReference "Emerald-City-DAO-Component-Library" */,
 			);
 			productRefGroup = 2B5478462A572415004AB863 /* Products */;
 			projectDirPath = "";
@@ -427,17 +430,26 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		2BC661372B19461B0094F320 /* XCLocalSwiftPackageReference "../../../Forge4Flow/ecosystem_sdks/ecDAO" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../../Forge4Flow/ecosystem_sdks/ecDAO;
+/* Begin XCRemoteSwiftPackageReference section */
+		2B8196422B1AA43300D8B031 /* XCRemoteSwiftPackageReference "Emerald-City-DAO-Component-Library" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Forge4Flow/Emerald-City-DAO-Component-Library";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.2.2;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		2B8170D92A57C0AD005E2D7D /* FCL */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FCL;
+		};
+		2B8196432B1AA43300D8B031 /* ecDAO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B8196422B1AA43300D8B031 /* XCRemoteSwiftPackageReference "Emerald-City-DAO-Component-Library" */;
+			productName = ecDAO;
 		};
 		2BC661382B19461B0094F320 /* ecDAO */ = {
 			isa = XCSwiftPackageProductDependency;

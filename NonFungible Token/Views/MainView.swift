@@ -14,6 +14,7 @@ import ecDAO
 struct MainView: View {
     @State var showCodeSheet: Bool = false
     @StateObject var codeConfig: CodeViewConfig = CodeViewConfig(title: "Title", description: "Description", swiftCode: Scripts.getNFTs, cadenceCode: Transactions.setupCollection)
+    @State var showNFTsView: Bool = false
     @State var nfts: [NFT] = []
     
     var body: some View {
@@ -30,6 +31,9 @@ struct MainView: View {
         }
         .sheet(isPresented: $showCodeSheet, onDismiss: { codeConfig.codeType = .swift }) {
             CodeSheet(codeType: $codeConfig.codeType, title: $codeConfig.title, description: $codeConfig.description, swiftCode: $codeConfig.swiftCode, cadenceCode: $codeConfig.cadenceCode)
+        }
+        .sheet(isPresented: $showNFTsView) {
+            NFTSheetView(NFTs: $nfts)
         }
     }
     
@@ -61,7 +65,7 @@ struct MainView: View {
                             
                             flowManager.subscribeTransaction(txId: id)
                         } catch {
-                            print(error)
+                            flowManager.showErrorView(error: error.localizedDescription)
                         }
                     }
                 }
@@ -98,7 +102,7 @@ struct MainView: View {
                 .buttonStyle(PlainButtonStyle())
                 .padding(.bottom, 3)
                 
-                ButtonView(title: "Get Balance") {
+                ButtonView(title: "Get NFTs") {
                     Task {
                         await getNFTs()
                     }
@@ -125,10 +129,11 @@ struct MainView: View {
             }.decode([NFT].self)
             await MainActor.run {
                 nfts = block
+                self.showNFTsView.toggle()
             }
         } catch {
             await MainActor.run {
-                flowManager.txError = error.localizedDescription
+                flowManager.showErrorView(error: error.localizedDescription)
             }
         }
     }
@@ -138,7 +143,7 @@ struct MainView: View {
             let txId = try await fcl.mutate(cadence: Transactions.setupCollection.code)
             flowManager.subscribeTransaction(txId: txId)
         } catch {
-            print(error)
+            flowManager.showErrorView(error: error.localizedDescription)
         }
     }
     

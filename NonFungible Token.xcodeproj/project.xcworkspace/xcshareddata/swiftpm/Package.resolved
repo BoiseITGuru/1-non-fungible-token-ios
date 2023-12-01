@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "emerald-city-dao-component-library",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Forge4Flow/Emerald-City-DAO-Component-Library",
+      "state" : {
+        "revision" : "e0037f0f5de7a5a3104d8f4f904e99d6e50e9bdc",
+        "version" : "0.2.2"
+      }
+    },
+    {
       "identity" : "fcl-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/outblock/fcl-swift.git",
@@ -43,6 +52,15 @@
       "state" : {
         "revision" : "e1721bea71d8a27e209398f5a740ef02f6c6c920",
         "version" : "0.3.1"
+      }
+    },
+    {
+      "identity" : "flowcomponents",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Forge4Flow/FlowComponents.git",
+      "state" : {
+        "revision" : "0775afed7ad499196b8070536721ec1b8cea496d",
+        "version" : "0.2.4"
       }
     },
     {
@@ -131,8 +149,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Forge4Flow/SyntaxHighlight.git",
       "state" : {
-        "revision" : "28d3c25294ee8095facc846a9b515fc2f64693fc",
-        "version" : "0.3.1"
+        "revision" : "a979b70db7d0bb1d4b76e9f9ee319707e17567e0",
+        "version" : "0.3.2"
       }
     },
     {

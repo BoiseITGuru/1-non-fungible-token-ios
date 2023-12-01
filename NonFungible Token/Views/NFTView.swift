@@ -9,27 +9,61 @@ import SwiftUI
 import FCL
 import Flow
 import FlowComponents
+import ecDAO
+
+struct NFTSheetView: View {
+    @EnvironmentObject var appProps: AppProperties
+    @Binding var NFTs: [NFT]
+    
+    var body: some View {
+        ZStack {
+            BackgroundView()
+            
+            VStack {
+                Text("Your NFT Collection")
+                    .font(.title)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.top, 10)
+                
+                if appProps.isiPad {
+                    HStack {
+                        ForEach(NFTs) { nft in
+                            NFTView(nft: nft)
+                        }
+                    }
+                } else {
+                    TabView {
+                        ForEach(NFTs) { nft in
+                            NFTView(nft: nft)
+                                .tag(nft.id)
+                        }
+                    }
+                    .tabViewStyle(.page)
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+}
 
 struct NFTView: View {
+    @Environment(\.colorScheme) var colorScheme
     @State var nft: NFT
     @State var transferAddress: String = ""
     
     
     var body: some View {
         VStack {
-            HStack {
-                Text(nft.name)
-                    .foregroundStyle(Color.white)
-                Spacer()
-                Text("\(nft.id)")
-                    .foregroundStyle(Color.white)
-            }
+            Text(nft.name)
+                .font(.title2)
             
             Text(nft.description)
-                .foregroundStyle(Color.white)
+                .font(.caption)
+                .multilineTextAlignment(.center)
+                .frame(minHeight: 30)
             
             IPFSImage(cid: nft.thumbnail["url"] ?? "")
-                .frame(width: 300)
+                .frame(width: 200)
             
             TextField("Transfer To Address", text: $transferAddress)
                 .submitLabel(.send)
@@ -39,8 +73,9 @@ struct NFTView: View {
                     Task { await transferNFT() }
                 }
                 .frame(maxWidth: .infinity, maxHeight: 50)
-                .cornerRadius(15)
                 .padding(3)
+                .background(colorScheme == .dark ? Color.black.opacity(0.4) : Color.white.opacity(0.4))
+                .cornerRadius(15)
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(Color.eaPrimary, lineWidth: 3)
@@ -49,6 +84,7 @@ struct NFTView: View {
             
             ButtonView(title: "Transfer", action: { Task { await transferNFT() } })
         }
+        .frame(maxHeight: .infinity, alignment: .top)
     }
     
     func transferNFT() async {
