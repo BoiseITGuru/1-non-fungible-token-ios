@@ -6,10 +6,17 @@
 //
 
 import Foundation
+import FlowComponents
 
-enum Scripts: String {
-    case getNFTs =
-        """
+enum Scripts: CadenceCode {
+    case getNFTs
+    
+    var fileName: String {
+        return "getNFTs.cdc"
+    }
+    
+    var code: String {
+        return """
         import ExampleNFT from  0xDeployer
         import MetadataViews from 0xStandard
 
@@ -55,4 +62,5 @@ enum Scripts: String {
           return answer
         }
         """
+    }
 }

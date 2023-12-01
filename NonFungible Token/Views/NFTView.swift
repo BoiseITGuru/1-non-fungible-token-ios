@@ -8,6 +8,7 @@
 import SwiftUI
 import FCL
 import Flow
+import FlowComponents
 
 struct NFTView: View {
     @State var nft: NFT
@@ -38,12 +39,11 @@ struct NFTView: View {
                     Task { await transferNFT() }
                 }
                 .frame(maxWidth: .infinity, maxHeight: 50)
-                .background(Color.secondaryAccentColor)
                 .cornerRadius(15)
                 .padding(3)
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.defualtAccentColor, lineWidth: 3)
+                        .stroke(Color.eaPrimary, lineWidth: 3)
                 )
                 .padding(.bottom, 4)
             
@@ -53,7 +53,7 @@ struct NFTView: View {
     
     func transferNFT() async {
         do {
-            let txId = try await fcl.mutate(cadence: Transactions.transfer.rawValue, args: [.address(Flow.Address(hex: transferAddress)), .uint64(nft.id)])
+            let txId = try await fcl.mutate(cadence: Transactions.transfer.code, args: [.address(Flow.Address(hex: transferAddress)), .uint64(nft.id)])
             await MainActor.run {
                 self.transferAddress = ""
             }
