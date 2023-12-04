@@ -12,8 +12,9 @@ import FlowComponents
 import ecDAO
 
 struct MainView: View {
+    @Environment(FlowManager.self) private var flowManager
     @State var showCodeSheet: Bool = false
-    @StateObject var codeConfig: CodeViewConfig = CodeViewConfig(title: "Title", description: "Description", swiftCode: Scripts.getNFTs, cadenceCode: Transactions.setupCollection)
+    @State var codeConfig: CodeViewConfig?
     @State var showNFTsView: Bool = false
     @State var nfts: [NFT] = []
     
@@ -29,8 +30,10 @@ struct MainView: View {
             
             Spacer()
         }
-        .sheet(isPresented: $showCodeSheet, onDismiss: { codeConfig.codeType = .swift }) {
-            CodeSheet(codeType: $codeConfig.codeType, title: $codeConfig.title, description: $codeConfig.description, swiftCode: $codeConfig.swiftCode, cadenceCode: $codeConfig.cadenceCode)
+        .sheet(isPresented: .constant(codeConfig != nil), onDismiss: { codeConfig = nil }) {
+            if let config = codeConfig {
+                CodeSheet(config: .constant(config))
+            }
         }
         .sheet(isPresented: $showNFTsView) {
             NFTSheetView(NFTs: $nfts)
@@ -46,7 +49,7 @@ struct MainView: View {
 
                 
                 Button(action: {
-                    updateCodeConfig(title: "setupCollection Transaction", description: "This is the FCL code that runs a transaction to setup a collection for the connected user.", swiftCode: SwiftCode.setupCollection, cadenceCode: Transactions.setupCollection)
+                    self.codeConfig = CodeViewConfig(title: "setupCollection Transaction", description: "This is the FCL code that runs a transaction to setup a collection for the connected user.", swiftCode: SwiftCode.setupCollection, cadenceCode: Transactions.setupCollection)
                 }, label: {
                     HStack(spacing: 0) {
                         Image(systemName: "chevron.left.slash.chevron.right")
@@ -60,13 +63,7 @@ struct MainView: View {
                 
                 ButtonView(title: "Setup Vault") {
                     Task {
-                        do {
-                            let id = try await fcl.mutate(cadence: Transactions.setupCollection.code)
-                            
-                            flowManager.subscribeTransaction(txId: id)
-                        } catch {
-                            flowManager.showErrorView(error: error.localizedDescription)
-                        }
+                        await flowManager.mutate(cadence: Transactions.setupCollection.code)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: 40)
@@ -90,7 +87,7 @@ struct MainView: View {
                     .padding(.vertical)
                 
                 Button(action: {
-                    updateCodeConfig(title: "getNFTs Script", description: "This is the FCL code that runs a transaction to setup a vault for the connected user.", swiftCode: Transactions.transfer, cadenceCode: Transactions.setupCollection)
+                    self.codeConfig = CodeViewConfig(title: "getNFTs Script", description: "This is the FCL code that runs a transaction to setup a vault for the connected user.", swiftCode: Transactions.transfer, cadenceCode: Transactions.setupCollection)
                 }, label: {
                     HStack(spacing: 0) {
                         Image(systemName: "chevron.left.slash.chevron.right")
@@ -132,9 +129,7 @@ struct MainView: View {
                 self.showNFTsView.toggle()
             }
         } catch {
-            await MainActor.run {
-                flowManager.showErrorView(error: error.localizedDescription)
-            }
+            flowManager.txError = error.localizedDescription
         }
     }
     
@@ -143,16 +138,7 @@ struct MainView: View {
             let txId = try await fcl.mutate(cadence: Transactions.setupCollection.code)
             flowManager.subscribeTransaction(txId: txId)
         } catch {
-            flowManager.showErrorView(error: error.localizedDescription)
+            flowManager.txError = error.localizedDescription
         }
-    }
-    
-    private func updateCodeConfig(title: String, description: String, swiftCode: CadenceCode, cadenceCode: CadenceCode) {
-        codeConfig.title = title
-        codeConfig.description = description
-        codeConfig.swiftCode = swiftCode
-        codeConfig.cadenceCode = cadenceCode
-            
-        self.showCodeSheet = true
     }
 }

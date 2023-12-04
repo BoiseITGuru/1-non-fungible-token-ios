@@ -12,7 +12,7 @@ import FlowComponents
 import ecDAO
 
 struct NFTSheetView: View {
-    @EnvironmentObject var appProps: AppProperties
+    @Environment(AppProperties.self) private var appProps
     @Binding var NFTs: [NFT]
     
     var body: some View {
@@ -48,6 +48,7 @@ struct NFTSheetView: View {
 
 struct NFTView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(FlowManager.self) private var flowManager
     @State var nft: NFT
     @State var transferAddress: String = ""
     
@@ -88,14 +89,9 @@ struct NFTView: View {
     }
     
     func transferNFT() async {
-        do {
-            let txId = try await fcl.mutate(cadence: Transactions.transfer.code, args: [.address(Flow.Address(hex: transferAddress)), .uint64(nft.id)])
-            await MainActor.run {
-                self.transferAddress = ""
-            }
-            FlowManager.shared.subscribeTransaction(txId: txId)
-        } catch {
-            print(error)
+        await flowManager.mutate(cadence: Transactions.transfer.code, args: [.address(Flow.Address(hex: transferAddress)), .uint64(nft.id)])
+        await MainActor.run {
+            self.transferAddress = ""
         }
     }
 }

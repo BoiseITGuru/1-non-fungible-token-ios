@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Forge4Flow/Emerald-City-DAO-Component-Library",
       "state" : {
-        "revision" : "e0037f0f5de7a5a3104d8f4f904e99d6e50e9bdc",
-        "version" : "0.2.2"
+        "revision" : "7b5fd50383ef4b074c6a6918be34df7dbc9b2a1e",
+        "version" : "0.2.3"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Forge4Flow/FlowComponents.git",
       "state" : {
-        "revision" : "0775afed7ad499196b8070536721ec1b8cea496d",
-        "version" : "0.2.4"
+        "revision" : "95a71f3b50b604189b3dd411d7623acb0e299cf5",
+        "version" : "0.3.1"
       }
     },
     {

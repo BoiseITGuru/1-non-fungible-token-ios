@@ -36,15 +36,16 @@ struct NonFungible_TokenApp: App {
         fcl.config
             .put("0xDeployer", value: fcl.currentEnv == .emulator ? "0xf8d6e0586b0a20c7" : testAccount)
             .put("0xStandard", value: fcl.currentEnv == .emulator ? "0xf8d6e0586b0a20c7" : "0x631e88ae7f1d7c20")
-        
-        ecDAOinit()
     }
     
     var body: some Scene {
         WindowGroup {
-            RouterView(title: $title, desc: $description) {
-                MainView()
+            FlowApp {
+                RouterView(title: $title, desc: $description) {
+                    MainView()
+                }
             }
+            .ecDAOinit()
         }
     }
 }
